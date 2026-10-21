@@ -1,0 +1,16 @@
+## Interface: 16001
+## Title: Moteve Guide
+## Notes: Horde és Alliance 1-30 útvonalak, 23 zónával, nyíllal, automatikus quest felvétellel/leadással és XP/óra kijelzéssel. /mg
+## Author: Zoltán Gosztonyi
+## Version: 0.6.4
+## SavedVariables: MoteveGuideDB
+## SavedVariablesPerCharacter: MoteveGuideChar
+## IconTexture: Interface\AddOns\MoteveGuide\Textures\arrow
+
+Theme.lua
+Guides.lua
+ZoneGuides.lua
+Appearance.lua
+Guide.lua
+Resize.lua
+Options.lua
