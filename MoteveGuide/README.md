@@ -1,6 +1,15 @@
-# Moteve Guide 0.6.4
+# Moteve Guide 0.7.0
 
 Saját Horde és Alliance leveling útvonalak WoW Foreverhez, RestedXP-szerű működéssel.
+
+## 0.7.0 – a chathez és damage meterhez illő Moteve kinézet
+
+- Ötödik, külön választható ablak- és nyílkinézet: **Moteve**. A beállításokban a meglévő négy stílus mellett jelenik meg.
+- A Moteve Chat és Moteve Damage Meter színeit használja: áttetsző sötétkék háttér, finom kék szegély, lila aktív jelölő és XP-sáv, cián célkitűzéssáv, mentazöld teljesített célok.
+- Marcellus címek és magyar ékezeteket támogató Barlow szövegek. A hátteret a chathez hasonló függőleges áttűnés teszi visszafogottá.
+- A nyíl cián mutatót és lilás áttetsző hátteret kap; a távolság, irányszámítás és megérkezési pipa változatlanul működik.
+- Az ablak és a nyíl egymástól függetlenül állítható, összesen 25 párosítással. A választógombok öt stílusnál is elférnek a panelen.
+- A Glass marad az alapértelmezett; a meglévő választásokat megtartja. A stílushoz nem szükséges a Chat vagy a Damage Meter külön telepítése.
 
 ## 0.6.4 – magyar ékezetek a súgóbuborékokban
 

@@ -129,7 +129,8 @@ local function SkinSelector(key,label,atY)
     for i,id in ipairs(ns.SkinOrder) do
         local skin=id
         local b=SettingsButton()
-        b:SetSize(137,26);b:SetPoint("TOPLEFT",20+(i-1)*145,atY-24)
+        local width=math.floor((580-(#ns.SkinOrder-1)*8)/#ns.SkinOrder)
+        b:SetSize(width,26);b:SetPoint("TOPLEFT",20+(i-1)*(width+8),atY-24)
         b:SetScript("OnClick",function() ns.SetAppearance(key,skin) end)
         b:SetText(ns.Skins[skin].label);skinButtons[key][skin]=b
     end
