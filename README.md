@@ -4,9 +4,9 @@
 
 A magyar kezelőfelülethez állítható méretű ablak, öt választható kinézet és külön beállítható irányjelző tartozik.
 
-**Aktuális verzió: 0.7.0**
+**Aktuális verzió: 0.7.1**
 
-[Az addon letöltése (ZIP)](downloads/MoteveGuide-0.7.0.zip?raw=true)
+[Az addon letöltése (ZIP)](downloads/MoteveGuide-0.7.1.zip?raw=true)
 
 ## Telepítés
 
@@ -36,7 +36,7 @@ Frissítéskor cseréld le az addon mappáját az új csomagra. Új fájlok tele
 - Irányjelző nyíl, távolság és térképes célpont.
 - Automatikus léptetés: a már teljesített lépéseket átugorja a következő teendőig.
 - Korábbi lépések visszanézése a bal nyíllal és kétirányú görgetéssel.
-- Öt függetlenül választható ablak- és nyílkinézet: Eredeti, Minimal, Classic Light, Glass, Moteve. Új beállításoknál a Glass az alapértelmezett.
+- Öt függetlenül választható ablak- és nyílkinézet: Eredeti, Minimal, Classic Light, Glass, Moteve. Új beállításoknál a Moteve az alapértelmezett.
 - Átméretezhető ablak, XP/óra kijelzés, állítható számú következő lépés.
 - Automatikus küldetésfelvétel és -leadás, kikapcsolható beállítással.
 - Magyar ékezeteket támogató betűtípusok a panelen és a súgóbuborékokban.
@@ -73,7 +73,7 @@ A **Beállítások → AddOns → Moteve Guide** panelen az ablak és a nyíl ki
 | Glass | Áttetsző szürkéskék háttér és finom keret |
 | Moteve | A Moteve Chathez és Damage Meterhez illő, áttetsző sötétkék felület, lila kiemelések és cián nyíl |
 
-Új beállításoknál a **Glass** az alapértelmezett. A korábban elmentett kinézetválasztás frissítés után is megmarad. A váltás azonnali; mind a 25 ablak–nyíl párosítás használható. A Glass áttetszőséget alkalmaz, háttérelmosást nem. A Moteve stílus a Chat és Damage Meter színeit használja: Marcellus címek, Barlow szövegek, lila aktív jelölő és XP-sáv, cián célkitűzéssávok és mentazöld teljesítések. A hozzá illő nyílhoz halvány lilás háttér tartozik. Használatához a másik két addon telepítése nem szükséges.
+Új beállításoknál a **Moteve** az alapértelmezett. A korábban elmentett kinézetválasztás frissítés után is megmarad. A váltás azonnali; mind a 25 ablak–nyíl párosítás használható. A Glass áttetszőséget alkalmaz, háttérelmosást nem. A Moteve stílus a Chat és Damage Meter színeit használja: Marcellus címek, Barlow szövegek, lila aktív jelölő és XP-sáv, cián célkitűzéssávok és mentazöld teljesítések. Minden nyíl karika és kör alakú háttér nélkül jelenik meg. Használatához a másik két addon telepítése nem szükséges.
 
 Ugyanitt kapcsolható az ablak, a nyíl, a térképes céljelölő, az automatikus küldetéskezelés és az XP-sor. A következő feladatok száma 0–8 között, az ablak mérete 55–130% között állítható.
 
@@ -130,4 +130,4 @@ Hibát a repository [Issues oldalán](https://github.com/zolesz05/GuideAddon/iss
 
 A küldetésadatok a Questie / QuestieDB projektből származnak; a származtatott útvonaladatokhoz GPL-3.0 forrásmegjelölés tartozik. A **Barlow** és **Marcellus** betűtípusok SIL Open Font License alatt érhetők el; a licencfájlok a `MoteveGuide/Fonts/` könyvtárban találhatók. A grafikai elemek eredetét az artwork-leírás dokumentálja.
 
-A 0.7.0-es csomag helyi Lua teszteken ellenőrizve (kinézetek, léptetés, útvonalak, méretezés, súgók és magyar karakterek). Élő WoW-kliensben a legutóbbi javítások még ellenőrzendők.
+A 0.7.1-es csomag helyi Lua teszteken ellenőrizve (kinézetek, léptetés, útvonalak, méretezés, súgók és magyar karakterek). Élő WoW-kliensben a legutóbbi javítások még ellenőrzendők.

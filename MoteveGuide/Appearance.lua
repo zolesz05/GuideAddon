@@ -25,7 +25,7 @@ local function Border(frame)
 end
 function ns.ValidateAppearance()
  for _,key in ipairs({"guideSkin","arrowSkin"}) do
-  if type(ns.db[key])~="string" or not ns.Skins[ns.db[key]] then ns.db[key]="glass" end
+  if type(ns.db[key])~="string" or not ns.Skins[ns.db[key]] then ns.db[key]="moteve" end
  end
 end
 function ns.SetAppearance(key,value)
@@ -173,10 +173,7 @@ function ns.StyleArrow(a,key)
  else a.tex:SetVertexColor(1,1,1,1) end
  a.tex:SetSize(64,64)
  a.dist:ClearAllPoints();a.dist:SetPoint("TOP",a.tex,"BOTTOM",0,key=="original" and 0 or -7)
- a.ring:SetTexture(ns.TEX(key=="classiclight" and "nav_compass" or "nav_glassdisc"))
- a.ring:SetShown(key=="classiclight" or key=="glass" or key=="moteve")
- if key=="moteve" then a.ring:SetVertexColor(M.violet[1],M.violet[2],M.violet[3],0.55)
- else a.ring:SetVertexColor(1,1,1,1) end
+ a.ring:Hide()
  Font(a.dist,key,key=="classiclight" and "title" or "bold",17)
  Font(a.what,key,"body",12)
  Color(a.what,key=="original" and {0.7,0.76,0.86} or {0.7,0.72,0.73})

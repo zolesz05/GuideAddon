@@ -7,7 +7,7 @@ local format, floor, abs, max, min, atan2, sqrt, pi = string.format, math.floor,
 local secret = issecretvalue or function() return false end
 
 local DEFAULTS = {
-    guideSkin = "glass", arrowSkin = "glass",
+    guideSkin = "moteve", arrowSkin = "moteve",
     show = true, arrow = true, waypoint = true, autoQuest = true, xp = true, lines = 4, scale = 0.85,
     point = "RIGHT", relPoint = "RIGHT", x = -40, y = 120,
     apoint = "TOP", arelPoint = "TOP", ax = 0, ay = -170,

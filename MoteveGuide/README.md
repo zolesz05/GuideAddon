@@ -1,6 +1,11 @@
-# Moteve Guide 0.7.0
+# Moteve Guide 0.7.1
 
 Saját Horde és Alliance leveling útvonalak WoW Foreverhez, RestedXP-szerű működéssel.
+
+## 0.7.1 – karika nélküli nyilak, Moteve alapértelmezés
+
+- Egyik nyílkinézet sem mutat körgyűrűt, iránytűkeretet vagy kör alakú hátteret. A mutató, távolság és megérkezési pipa megmarad.
+- Új, hiányzó vagy hibás kinézetbeállításnál a Moteve az alapértelmezett az ablakhoz és a nyílhoz is. A már elmentett érvényes választásokat megtartja.
 
 ## 0.7.0 – a chathez és damage meterhez illő Moteve kinézet
 
