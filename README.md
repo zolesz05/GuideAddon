@@ -6,7 +6,9 @@ A magyar kezelőfelülethez állítható méretű ablak, öt választható kiné
 
 **Aktuális verzió: 0.7.1**
 
-[Az addon letöltése (ZIP)](downloads/MoteveGuide-0.7.1.zip?raw=true)
+[Az addon letöltése (ZIP)](downloads/MoteveGuide.zip?raw=true)
+
+A letöltési link mindig a legfrissebb telepíthető csomagra mutat. A `downloads` mappában csak az aktuális `MoteveGuide.zip` szerepel; a régebbi kiadások külön ZIP-ként nem maradnak ott.
 
 ## Telepítés
 
@@ -122,6 +124,14 @@ A `/mg reset` a küldetésnaplót és a játékban már teljesített küldetése
 Hibát a repository [Issues oldalán](https://github.com/zolesz05/GuideAddon/issues) jelezhetsz. Add meg az addon és a kliens verzióját, a karakter faját és kasztját, az útvonal nevét, a lépés számát és a küldetés nevét. Képernyőkép vagy Lua-hibaüzenet segít a reprodukálásban.
 
 ## Forrás és részletek
+
+Az addon módosítása után a legfrissebb letölthető csomag a repository gyökeréből frissíthető:
+
+```sh
+python tools/package_addon.py
+```
+
+A parancs az aktuális `MoteveGuide` mappából készít ellenőrzött ZIP-et, lecseréli a `downloads/MoteveGuide.zip` fájlt, eltávolítja a régi verziószámos addoncsomagokat ebből a mappából, és frissíti a README verzióját. Feltöltéskor a forrást, a ZIP-et és a README-t együtt kell commitolni.
 
 - [Az addon forrása és teljes változásnaplója](MoteveGuide/README.md)
 - [Zónák és útvonalak](MoteveGuide/ZONES.md)
