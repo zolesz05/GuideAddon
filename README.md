@@ -140,4 +140,4 @@ A parancs az aktuális `MoteveGuide` mappából készít ellenőrzött ZIP-et, l
 
 A küldetésadatok a Questie / QuestieDB projektből származnak; a származtatott útvonaladatokhoz GPL-3.0 forrásmegjelölés tartozik. A **Barlow** és **Marcellus** betűtípusok SIL Open Font License alatt érhetők el; a licencfájlok a `MoteveGuide/Fonts/` könyvtárban találhatók. A grafikai elemek eredetét az artwork-leírás dokumentálja.
 
-A 0.7.1-es csomag helyi Lua teszteken ellenőrizve (kinézetek, léptetés, útvonalak, méretezés, súgók és magyar karakterek). A 0.7.2 útvonaljavításait (repülési pontok, Tauren quest-sorrend) a `python tools/check_routes.py` ellenőrzi. Élő WoW-kliensben a legutóbbi javítások még ellenőrzendők.
+A 0.7.1-es csomag helyi Lua teszteken ellenőrizve (kinézetek, léptetés, útvonalak, méretezés, súgók és magyar karakterek). A 0.7.2 útvonaljavításait (repülési pontok, Tauren quest-sorrend) a `python tools/check_routes.py`, a mentett lépések átszámozását a `python tools/check_step_migration.py` ellenőrzi. Élő WoW-kliensben a legutóbbi javítások még ellenőrzendők.

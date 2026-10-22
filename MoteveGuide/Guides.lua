@@ -2,6 +2,7 @@
 -- regenerate with gen.py. Step kinds: zone, a = accept, c = complete, t = turn in, fp = flight path, lvl = note.
 -- Hand corrections to carry into gen.py (checked by tools/check_routes.py): no fp steps for flight masters
 -- added after Classic (Razor Hill, Brill, Bloodhoof Village); 'A Task Unfinished' sits on the Narache -> Bloodhoof road.
+-- Adding or removing steps shifts saved progress: record each change in STEP_EDITS in Guide.lua.
 local _, ns = ...
 ns.GUIDES = {
   { id = "orctroll", name = "Orc / Troll 1–30", races = { ORC = true, TROLL = true }, steps = {

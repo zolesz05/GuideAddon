@@ -144,6 +144,38 @@ local function PreviousStep()
     ns.Refresh()
 end
 
+-- Saved progress (char.idx, char.skip) is keyed by step index. When a route loses ("-") or
+-- gains ("+") steps, remap it once, in order, so started characters keep their place.
+-- Checked against the old and new Guides.lua by tools/check_step_migration.py.
+local STEP_REV = 1
+local STEP_EDITS = {
+    [1] = {   -- 0.7.2: no Razor Hill / Brill / Bloodhoof fp; 'A Task Unfinished' on the Bloodhoof road
+        orctroll = { { "-", 62 } },
+        undead = { { "-", 46 } },
+        tauren = { { "-", 83 }, { "-", 82 }, { "-", 34 }, { "+", 34 }, { "+", 35 } },
+    },
+}
+local function MigrateSteps()
+    if char.idx then
+        for r = (char.stepRev or 0) + 1, STEP_REV do
+            local gone = false   -- the current step was removed: show steps inserted in its place
+            for _, e in ipairs(STEP_EDITS[r] and STEP_EDITS[r][char.guide] or {}) do
+                local op, at, skip = e[1], e[2], {}
+                for i in pairs(char.skip) do
+                    if op == "+" then skip[i >= at and i + 1 or i] = true
+                    elseif i ~= at then skip[i > at and i - 1 or i] = true end
+                end
+                char.skip = skip
+                if op == "-" and char.idx == at then gone = true
+                elseif char.idx > at or (op == "+" and char.idx == at and not gone) then
+                    char.idx = char.idx + (op == "+" and 1 or -1)
+                end
+            end
+        end
+    end
+    char.stepRev = STEP_REV
+end
+
 -- first run: start where the character really is (level and finished quests)
 local function FindStart()
     local lv = UnitLevel("player") or 1
@@ -1050,6 +1082,7 @@ ev:SetScript("OnEvent", function(_, e, a1)
         guide = GuideById(char.guide) or GuideForRace()
         if not guide then Print("nincs útvonal ehhez a karakterhez."); return end
         char.guide = guide.id
+        MigrateSteps()
         ns.guide = guide
         IndexGuide()
         F:SetScale(db.scale)
