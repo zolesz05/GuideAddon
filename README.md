@@ -4,7 +4,7 @@
 
 A magyar kezelőfelülethez állítható méretű ablak, öt választható kinézet és külön beállítható irányjelző tartozik.
 
-**Aktuális verzió: 0.7.1**
+**Aktuális verzió: 0.7.2**
 
 [Az addon letöltése (ZIP)](downloads/MoteveGuide.zip?raw=true)
 
@@ -140,4 +140,4 @@ A parancs az aktuális `MoteveGuide` mappából készít ellenőrzött ZIP-et, l
 
 A küldetésadatok a Questie / QuestieDB projektből származnak; a származtatott útvonaladatokhoz GPL-3.0 forrásmegjelölés tartozik. A **Barlow** és **Marcellus** betűtípusok SIL Open Font License alatt érhetők el; a licencfájlok a `MoteveGuide/Fonts/` könyvtárban találhatók. A grafikai elemek eredetét az artwork-leírás dokumentálja.
 
-A 0.7.1-es csomag helyi Lua teszteken ellenőrizve (kinézetek, léptetés, útvonalak, méretezés, súgók és magyar karakterek). Élő WoW-kliensben a legutóbbi javítások még ellenőrzendők.
+A 0.7.1-es csomag helyi Lua teszteken ellenőrizve (kinézetek, léptetés, útvonalak, méretezés, súgók és magyar karakterek). A 0.7.2 útvonaljavításait (repülési pontok, Tauren quest-sorrend) a `python tools/check_routes.py` ellenőrzi. Élő WoW-kliensben a legutóbbi javítások még ellenőrzendők.

@@ -1,6 +1,13 @@
-# Moteve Guide 0.7.1
+# Moteve Guide 0.7.2
 
 Saját Horde és Alliance leveling útvonalak WoW Foreverhez, RestedXP-szerű működéssel.
+
+## 0.7.2 – javított Horde útvonalak (Tauren, Orc / Troll, Undead)
+
+- Nincs több repülési pont felvétele ott, ahol a kliensben nincs flight master: Bloodhoof Village (Seikwa), Razor Hill (Shoja'my) és Brill (Morganus). Ezek a lépések korábban csak kézi átugrással tűntek el.
+- Tauren útvonal: az **A Task Unfinished** quest a Camp Narache és Bloodhoof Village közötti úton jelenik meg (Antur Fallow), a leadása Innkeeper Kauthnál rögtön a Bloodhoof Village-be érkezéskor, nem Thunder Bluff után.
+- A `tools/check_routes.py` ellenőrzi, hogy minden repülési pont létezik a célkliensben.
+- Útvonal-frissítés után a már elkezdett karaktereknél a lépésszámok eltolódhatnak eggyel; ha a Guide rossz lépést mutat, a `/mg reset` a jelenlegi szinttől újrakezdi az útvonalat.
 
 ## 0.7.1 – karika nélküli nyilak, Moteve alapértelmezés
 

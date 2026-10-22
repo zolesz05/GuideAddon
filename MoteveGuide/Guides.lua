@@ -1,5 +1,7 @@
 -- Moteve Guide - generated routes (from the QuestieDB Forever data, GPL-3.0). Do not edit by hand;
 -- regenerate with gen.py. Step kinds: zone, a = accept, c = complete, t = turn in, fp = flight path, lvl = note.
+-- Hand corrections to carry into gen.py (checked by tools/check_routes.py): no fp steps for flight masters
+-- added after Classic (Razor Hill, Brill, Bloodhoof Village); 'A Task Unfinished' sits on the Narache -> Bloodhoof road.
 local _, ns = ...
 ns.GUIDES = {
   { id = "orctroll", name = "Orc / Troll 1–30", races = { ORC = true, TROLL = true }, steps = {
@@ -64,7 +66,6 @@ ns.GUIDES = {
     {k="c", q=808, m=1411, x=67.4, y=87.8, t="Minshina's Skull", obj="Retrieve Minshina's skull from the circle of power on the Echo Isles.", el=6},
     {k="t", q=808, m=1411, x=56.0, y=74.7, t="Minshina's Skull", npc="Master Gadrin", lv=6, el=6},
     {k="t", q=817, m=1411, x=56.0, y=73.9, t="Practical Prey", npc="Vel'rin Fang", lv=6, el=6},
-    {k="fp", m=1411, x=52.0, y=41.8, t="Repülési pont: Shoja'my", npc="Shoja'my", el=6},
     {k="t", q=823, m=1411, x=52.2, y=43.1, t="Report to Orgnil", npc="Orgnil Soulscar", lv=6, el=6},
     {k="a", q=784, m=1411, x=52.0, y=43.5, t="Vanquish the Betrayers", npc="Gar'Thok", el=6},
     {k="t", q=2161, m=1411, x=51.5, y=41.6, t="A Peon's Burden", npc="Innkeeper Grosk", lv=7, el=7},
@@ -412,7 +413,6 @@ ns.GUIDES = {
     {k="a", q=5481, m=1420, x=43.1, y=54.7, t="Gordo's Task", npc="Gordo", el=5},
     {k="c", q=5481, m=1420, x=43.3, y=54.6, t="Gordo's Task", obj="Collect 3 Gloom Weed and deliver them to Junior Apothecary Holland in the Brill graveyard.", el=5},
     {k="c", q=365, m=1420, x=35.9, y=50.6, t="Fields of Grief", obj="Steal 10 pumpkins from the farm to the west, just north of Deathknell and take them to Apothecary Johaan in Brill.", el=5},
-    {k="fp", m=1420, x=60.0, y=52.2, t="Repülési pont: Morganus", npc="Morganus", el=5},
     {k="t", q=5481, m=1420, x=57.4, y=48.9, t="Gordo's Task", npc="Junior Apothecary Holland", lv=5, el=5},
     {k="a", q=5482, m=1420, x=57.4, y=48.9, t="Doom Weed", npc="Junior Apothecary Holland", el=5},
     {k="t", q=365, m=1420, x=59.5, y=52.4, t="Fields of Grief", npc="Apothecary Johaan", lv=5, el=5},
@@ -805,7 +805,8 @@ ns.GUIDES = {
     {k="t", q=757, m=1412, x=43.9, y=76.7, t="Rite of Strength", npc="Chief Hawkwind", lv=4, el=4},
     {k="a", q=763, m=1412, x=43.9, y=76.7, t="Rites of the Earthmother", npc="Chief Hawkwind", el=4},
     {k="a", q=1519, m=1412, x=44.4, y=76.8, t="Call of Earth", npc="Seer Ravenfeather", cls=64, el=4},
-    {k="fp", m=1412, x=46.0, y=63.5, t="Repülési pont: Seikwa", npc="Seikwa", el=4},
+    {k="a", q=1656, m=1412, x=47.6, y=70.2, t="A Task Unfinished", npc="Antur Fallow", el=4},
+    {k="t", q=1656, m=1412, x=45.9, y=64.2, t="A Task Unfinished", npc="Innkeeper Kauth", lv=5, el=5},
     {k="t", q=763, m=1412, x=46.7, y=63.4, t="Rites of the Earthmother", npc="Baine Bloodhoof", lv=5, el=5},
     {k="a", q=745, m=1412, x=46.7, y=63.4, t="Sharing the Land", npc="Baine Bloodhoof", el=5},
     {k="a", q=767, m=1412, x=46.7, y=63.4, t="Rite of Vision", npc="Baine Bloodhoof", el=5},
@@ -853,8 +854,6 @@ ns.GUIDES = {
     {k="a", q=744, m=1456, x=37.8, y=59.6, t="Preparation for Ceremony", npc="Eyahn Eagletalon", el=8},
     {k="c", q=744, m=1456, x=13.2, y=23.2, t="Preparation for Ceremony", obj="Collect 6 Azure Feathers and 6 Bronze Feathers, and bring them to Eyahn Eagletalon in Thunder Bluff.", el=8},
     {k="t", q=744, m=1456, x=37.8, y=59.6, t="Preparation for Ceremony", npc="Eyahn Eagletalon", lv=8, el=8},
-    {k="a", q=1656, m=1412, x=39.2, y=81.2, t="A Task Unfinished", npc="Antur Fallow", el=8},
-    {k="t", q=1656, m=1412, x=45.9, y=64.2, t="A Task Unfinished", npc="Innkeeper Kauth", lv=8, el=8},
     {k="grind", m=1412, x=45.9, y=64.2, t="Ölj mobokat a környéken, amíg eléred a 10. szintet", lv=10, el=8},
     {k="a", q=861, m=1412, x=46.0, y=63.4, t="The Hunter's Way", npc="Skorn Whitecloud", el=10},
     {k="a", q=5926, m=1412, x=47.5, y=63.0, t="Heeding the Call", npc="Gennia Runetotem", cls=1024, el=10},
