@@ -3,6 +3,7 @@
 Jobb klikk a Guide fejlécén → Útvonalak. Tíz útvonalanként az Előző / Következő gombbal lapozhatsz.
 A = Alliance, H = Horde. A főútvonalak: `/mg guide human`, `/mg guide dwarfgnome`, `/mg guide nightelf`.
 A korábbi Horde főútvonalak változatlanok: orctroll, tauren, undead.
+Új karakter alapból a RestedXP-útvonalat kapja (Alliance 1–20, Horde 1–22), utána a fenti főútvonal folytatódik: `tauren_rxp`, `orctroll_rxp`, `undead_rxp`, `human_rxp`, `dwarfgnome_rxp`, `nightelf_rxp`; Mage-nek `mage_h_rxp`, `mage_a_rxp`, illetve kézi választással `mage_aoe_a_rxp`.
 
 | Zónaútvonal | Questek (előquestekkel) | Parancs |
 |---|---:|---|

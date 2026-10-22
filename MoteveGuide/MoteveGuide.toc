@@ -1,8 +1,8 @@
 ## Interface: 16001
 ## Title: Moteve Guide
-## Notes: Horde és Alliance 1-30 útvonalak, 23 zónával, nyíllal, automatikus quest felvétellel/leadással és XP/óra kijelzéssel. /mg
+## Notes: RestedXP Forever útvonalak 1-20/22-ig (Mage-változatokkal), utána Horde és Alliance útvonalak 30-ig, 23 zónával, nyíllal, automatikus quest felvétellel/leadással és XP/óra kijelzéssel. /mg
 ## Author: Zoltán Gosztonyi
-## Version: 0.7.1
+## Version: 0.8.0
 ## SavedVariables: MoteveGuideDB
 ## SavedVariablesPerCharacter: MoteveGuideChar
 ## IconTexture: Interface\AddOns\MoteveGuide\Textures\arrow
@@ -10,6 +10,7 @@
 Theme.lua
 Guides.lua
 ZoneGuides.lua
+RXPRoutes.lua
 Appearance.lua
 Guide.lua
 Resize.lua

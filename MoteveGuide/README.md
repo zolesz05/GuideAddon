@@ -1,6 +1,15 @@
-# Moteve Guide 0.7.1
+# Moteve Guide 0.8.0
 
 Saját Horde és Alliance leveling útvonalak WoW Foreverhez, RestedXP-szerű működéssel.
+
+## 0.8.0 – RestedXP Forever útvonalak 1–20/22-ig
+
+- Új karakter a RestedXP ingyenes WoW Forever guide-jának útvonalát kapja: Alliance 1–20, Horde 1–22. Mage karakter a frakciója RestedXP Mage-útvonalát kapja.
+- 20/22 felett a korábbi Moteve útvonal folytatódik, a RestedXP-részben már leadott questek nélkül.
+- A meglévő karakterek a mentett útvonalukon és lépésükön maradnak; a régi útvonalak változatlanok, a `/mg guide` paranccsal továbbra is választhatók.
+- A RestedXP célonkénti lépései („Csináld meg”) a cél teljesülésekor továbblépnek, nem kell a quest egészére várni.
+- Hearthstone-, trainer-, vendor-, repülés- és utazási lépések is vannak. Ezeket a jobb nyíllal vagy `/mg next` paranccsal zárhatod le.
+- A RestedXP-szövegek angolok, a hardcore-ágat és a dungeon-lépéseket nem tartalmazza. A `tools/import_rxp.py` egy rögzített RXPGuides commitból generálja az útvonalakat.
 
 ## 0.7.1 – karika nélküli nyilak, Moteve alapértelmezés
 
@@ -85,7 +94,8 @@ Az új generátor és az adatforrás másolata külön forráscsomagban érhető
 - A méretet megjegyzi; questfrissítés és újrabelépés után is megmarad.
 - Az előre látható sorok száma a meglévő Beállítások menüben csökkenthető.
 
-## Útvonalak (fajtól függően automatikusan)
+## Útvonalak (fajtól és kaszttól függően automatikusan)
+- **RestedXP (alapértelmezett új karakternél):** `tauren_rxp`, `orctroll_rxp`, `undead_rxp` 1–22; `human_rxp`, `dwarfgnome_rxp`, `nightelf_rxp` 1–20; Mage: `mage_h_rxp` (Horde, 1–21), `mage_a_rxp` (Human/Gnome, 1–21), `mage_aoe_a_rxp` (Human/Gnome AoE, 1–22, csak kézi választással). Utána a régi útvonal folytatódik.
 - **Orc / Troll:** Durotar 1–12 → Barrens 12–20
 - **Undead:** Tirisfal 1–11 → Silverpine 11–15 → Barrens 15–20
 - **Tauren:** Mulgore 1–11 → Barrens 11–20
@@ -102,7 +112,7 @@ Az új generátor és az adatforrás másolata külön forráscsomagban érhető
 - Bal klikk egy soron: ez legyen az aktuális. Jobb klikk: kész / kihagy.
 
 ## Parancsok
-`/mg` ablak ki/be · `/mg next` · `/mg prev` · `/mg reset` · `/mg guide orctroll|undead|tauren` · `/mg nyil` · `/mg auto` · `/mg opciok`
+`/mg` ablak ki/be · `/mg next` · `/mg prev` · `/mg reset` · `/mg guide tauren_rxp|orctroll_rxp|undead_rxp|human_rxp|dwarfgnome_rxp|nightelf_rxp|mage_h_rxp|mage_a_rxp|mage_aoe_a_rxp|orctroll|undead|tauren` · `/mg nyil` · `/mg auto` · `/mg opciok`
 
 Beállítások: Options → AddOns → Moteve Guide.
 
@@ -112,7 +122,7 @@ Beállítások: Options → AddOns → Moteve Guide.
 - Utazási és hearthstone lépések még nincsenek benne.
 
 ## Credits
-A quest-, NPC- és koordinátaadatok a [QuestieDB](https://github.com/Questie/Questie) projektből származnak (GPL-3.0). A betűtípusok Barlow és Marcellus (SIL OFL). A RestedXP fizetős guide-jaiból semmi nincs benne.
+A régi útvonalak quest-, NPC- és koordinátaadatai a [QuestieDB](https://github.com/Questie/Questie) projektből származnak (GPL-3.0). Az 1–20/22-es `*_rxp` útvonalak a RestedXP ingyenes WoW Forever guide-jaiból készültek ([RestedXP/RXPGuides](https://github.com/RestedXP/RXPGuides), `Guides/forever`: Mulgore, Durotar, Undead, Barrens, Human, Dwarf/Gnome, Night Elf, Alliance 11–20 és a Mage-útvonalak), módosítva, CC BY-NC-SA 4.0 licenccel (lásd `RXP-LICENSE` és `RXPRoutes.lua`). A RestedXP fizetős, 20/22 feletti guide-jaiból semmi nincs benne. A betűtípusok Barlow és Marcellus (SIL OFL).
 
 
 ## 0.4.0 – bronzkeretes megjelenés
