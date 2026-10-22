@@ -54,4 +54,28 @@ function T.objective_step_is_not_done_without_the_quest()
     H.ok(not ns.StepDone(1))
 end
 
+local XP = { id = "test_xp", name = "t", races = {}, steps = {
+    { k = "grind", t = "g", lv = 3, xp = 1150 },
+    { k = "grind", t = "g", lv = 3, xp = -40 },
+    { k = "grind", t = "g", lv = 3, xp = 0.75 },
+    { k = "grind", t = "g", lv = 3 },
+} }
+
+local function GrindDone(level, xp)
+    local ns = H.Load({ char = { guide = "test_xp" }, setup = AddGuide(XP), level = level, xp = xp, xpMax = 1400 })
+    return { ns.StepDone(1), ns.StepDone(2), ns.StepDone(3), ns.StepDone(4) }
+end
+
+function T.grind_step_waits_for_the_xp_into_its_level()
+    local d = GrindDone(3, 1000)
+    H.ok(not d[1], "1000 < 1150 xp"); H.ok(not d[2], "1000 < 1400-40 xp"); H.ok(not d[3], "1000 < 75% of 1400")
+    H.ok(d[4], "a plain grind is done at the level")
+    d = GrindDone(3, 1360)
+    H.ok(d[1]); H.ok(d[2]); H.ok(d[3])
+    d = GrindDone(2, 1399)
+    H.ok(not d[1] and not d[2] and not d[3] and not d[4], "below the level")
+    d = GrindDone(4, 0)
+    H.ok(d[1] and d[2] and d[3] and d[4], "past the level")
+end
+
 return T

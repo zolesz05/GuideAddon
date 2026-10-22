@@ -126,7 +126,13 @@ local function StepDone(i)
     if k == "a" then return InLog(s.q) or Completed(s.q) end
     if k == "c" then return Completed(s.q) or (InLog(s.q) and LogComplete(s.q)) or (s.oi and ObjectiveDone(s.q, s.oi)) end
     if k == "t" then return Completed(s.q) end
-    if k == "grind" then return (UnitLevel("player") or 1) >= (s.lv or 1) end
+    if k == "grind" then
+        -- xp: >= 1 is xp into level lv, < 0 is xp short of the next level, 0..1 a fraction of the bar
+        local lv, need = UnitLevel("player") or 1, s.lv or 1
+        if lv ~= need or not s.xp then return lv >= need end
+        local cur, maxv = UnitXP("player") or 0, UnitXPMax("player") or 1
+        return cur >= (s.xp < 0 and maxv + s.xp or s.xp < 1 and s.xp * maxv or s.xp)
+    end
     if k == "fp" then return char.fp[s.npc or s.t] and true or false end
     return false
 end

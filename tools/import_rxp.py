@@ -516,8 +516,8 @@ def convert_step(step, scope, domain, titles, el):
                 pre.append((q, q))
             elif cmd in ('isQuestAvailable', 'isNotOnQuest'):
                 ex.append(q)
-        elif cmd == 'xp' and args[:1] in ('<', '>'):
-            continue   # a level condition, not a level to reach
+        elif cmd == 'xp' and (args[:1] in ('<', '>') or args.split()[0].endswith(',1')):
+            continue   # a level condition or skip-at-level ('.xp 10,1'), not a level to reach
         elif cmd in QUEST_ACTIONS:
             actions.append((cmd, args, clean(text), lset, comment))
         elif cmd in NOTE_COMMANDS:
@@ -552,8 +552,8 @@ def convert_step(step, scope, domain, titles, el):
             continue
         nums = args.split(',')
         if cmd == 'xp':
-            lv = int(re.match(r'\d+', args).group())
-            s = {'k': 'grind', 't': text or text_for(pairs) or f'Ölj mobokat, amíg eléred a {lv}. szintet', 'lv': lv}
+            lv, xp = parse_xp(args, where)
+            s = {'k': 'grind', 't': text or text_for(pairs) or grind_text(lv, xp), 'lv': lv, 'xp': xp}
             place(s, pairs)
         elif cmd == 'fp':
             name = args or re.sub(r'^Get the (.*?) flight path.*$', r'\1', text)
@@ -590,6 +590,32 @@ def convert_step(step, scope, domain, titles, el):
                 s['npc'] = npc
             emit(s, pairs)
     return out
+
+
+def parse_xp(args, where):
+    """'.xp N' -> (N, None); 'N+X' -> X xp into level N; 'N-X' -> X xp short of level N, i.e. level N-1
+    with xp=-X (counted back from UnitXPMax); 'N.f' -> fraction 0.f of level N's bar."""
+    m = re.fullmatch(r'(\d+)(?:([+-])(\d+)|(\.\d+))?', args.split()[0])
+    if not m:
+        raise RXPError(f'{where}: bad .xp {args!r}')
+    lv = int(m.group(1))
+    if m.group(2) == '+':
+        return lv, int(m.group(3))
+    if m.group(2) == '-':
+        return lv - 1, -int(m.group(3))
+    if m.group(4):
+        return lv, float(m.group(4))
+    return lv, None
+
+
+def grind_text(lv, xp):
+    if xp is None:
+        return f'Ölj mobokat, amíg eléred a {lv}. szintet'
+    if xp < 0:
+        return f'Ölj mobokat, amíg {-xp} XP hiányzik a {lv + 1}. szintig'
+    if xp < 1:
+        return f'Ölj mobokat, amíg eléred a {lv}. szint {round(xp * 100)}%-át'
+    return f'Ölj mobokat, amíg eléred a {lv}. szinten a {xp} XP-t'
 
 
 def scope_races(scope):
@@ -645,7 +671,7 @@ def add_steps(steps, guide, scope, domain, guides, titles, el):
 # ---------------------------------------------------------------------------
 # Lua output
 # ---------------------------------------------------------------------------
-FIELDS = ('k', 'q', 'oi', 'm', 'x', 'y', 't', 'npc', 'obj', 'lv', 'cls', 'rr', 'pre', 'ex', 'el')
+FIELDS = ('k', 'q', 'oi', 'm', 'x', 'y', 't', 'npc', 'obj', 'lv', 'xp', 'cls', 'rr', 'pre', 'ex', 'el')
 
 
 def lua_str(s):

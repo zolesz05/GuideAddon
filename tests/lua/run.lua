@@ -46,7 +46,7 @@ local function band(a, b)
     return r
 end
 
--- opts: race ("Tauren"), class ("WARRIOR"), faction, level, char (saved MoteveGuideChar),
+-- opts: race ("Tauren"), class ("WARRIOR"), faction, level, xp, xpMax, char (saved MoteveGuideChar),
 -- quests = { [id] = { log = true, complete = false, done = false, objectives = { {finished = true}, ... } } },
 -- setup = function(ns) called after the TOC files load, before the events.
 function H.Load(opts)
@@ -62,8 +62,8 @@ function H.Load(opts)
         UnitClass = function() local c = opts.class or "WARRIOR"; return c:sub(1, 1) .. c:sub(2):lower(), c end,
         UnitFactionGroup = function() return opts.faction or "Horde" end,
         UnitLevel = function() return opts.level or 1 end,
-        UnitXP = function() return 0 end,
-        UnitXPMax = function() return 400 end,
+        UnitXP = function() return opts.xp or 0 end,
+        UnitXPMax = function() return opts.xpMax or 400 end,
         UnitSex = function() return 2 end,
         GetXPExhaustion = function() return 0 end,
         GetTime = function() return 0 end,

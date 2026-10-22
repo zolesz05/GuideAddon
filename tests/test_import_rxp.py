@@ -162,8 +162,24 @@ class CommandTest(unittest.TestCase):
 
     def test_xp_is_a_grind_to_the_level(self):
         s = self.one('.xp 6 >> Grind to level 6')
-        self.assertEqual((s['k'], s['lv'], s['t']), ('grind', 6, 'Grind to level 6'))
-        self.assertEqual(self.one('.xp 3+1150 >> Grind')['lv'], 3)
+        self.assertEqual((s['k'], s['lv'], s['t'], s.get('xp')), ('grind', 6, 'Grind to level 6', None))
+
+    def test_xp_keeps_the_xp_part_of_the_target(self):
+        self.assertEqual([(s['lv'], s['xp']) for s in (
+            self.one('.xp 3+1150 >> Grind'), self.one('.xp 4-40'), self.one('.xp 18.75 >> Grind'))],
+            [(3, 1150), (3, -40), (18, 0.75)])
+        self.assertEqual(self.one('.xp 4-40')['t'], 'Ölj mobokat, amíg 40 XP hiányzik a 4. szintig')
+
+    def test_xp_skip_at_level_is_a_condition_not_a_grind(self):
+        steps = convert('.turnin 940 >> Turn in\n.accept 952 >> Accept\n.xp 10,1')
+        self.assertEqual([(s['k'], s['el']) for s in steps], [('t', 1), ('a', 1)])
+        self.assertEqual([s['k'] for s in convert('.turnin 487 >> Turn in\n.xp 9.56,1 --Only if needed')], ['t'])
+
+    def test_no_grind_step_from_an_xp_skip_in_the_routes(self):
+        guides = rxp.load_guides()
+        route = next(r for r in rxp.ROUTES if r['id'] == 'nightelf_rxp')
+        steps = rxp.build_route(route, guides, rxp.quest_titles(guides))
+        self.assertFalse([s for s in steps if s['k'] == 'grind' and 'Fandral' in s['t']])
 
     def test_xp_below_is_a_condition_not_a_grind(self):
         self.assertEqual(convert('.xp <10,1\n.accept 1 >>Accept A')[0]['k'], 'a')
