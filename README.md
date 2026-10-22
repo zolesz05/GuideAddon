@@ -4,7 +4,7 @@
 
 A magyar kezelőfelülethez állítható méretű ablak, öt választható kinézet és külön beállítható irányjelző tartozik.
 
-**Aktuális verzió: 0.7.2**
+**Aktuális verzió: 0.8.0**
 
 [Az addon letöltése (ZIP)](downloads/MoteveGuide.zip?raw=true)
 
@@ -81,10 +81,15 @@ Ugyanitt kapcsolható az ablak, a nyíl, a térképes céljelölő, az automatik
 
 ## Útvonalak
 
-A csomag hat főútvonalat és 32 külön zónaútvonalat tartalmaz, 23 zónával. A választó a karakter frakciójának megfelelő útvonalakat kínálja.
+A csomag kilenc RestedXP-alapú útvonalat, hat főútvonalat és 32 külön zónaútvonalat tartalmaz, 23 zónával. A választó a karakter frakciójának megfelelő útvonalakat kínálja.
+
+Új karakter alapból a RestedXP ingyenes WoW Forever guide-jának útvonalát kapja (Alliance 1–20, Horde 1–22), Mage a frakciója RestedXP Mage-útvonalát. 20/22 felett a régi főútvonal folytatódik, a már leadott questek nélkül. A meglévő karakterek a mentett útvonalukon maradnak.
 
 | Karakter / főútvonal | Kiválasztás |
 | --- | --- |
+| Human / Dwarf, Gnome / Night Elf 1–20 (RestedXP) | `/mg guide human_rxp` · `dwarfgnome_rxp` · `nightelf_rxp` |
+| Orc, Troll / Tauren / Undead 1–22 (RestedXP) | `/mg guide orctroll_rxp` · `tauren_rxp` · `undead_rxp` |
+| Mage (RestedXP) | `/mg guide mage_h_rxp` · `mage_a_rxp` · `mage_aoe_a_rxp` |
 | Human | `/mg guide human` |
 | Dwarf / Gnome | `/mg guide dwarfgnome` |
 | Night Elf | `/mg guide nightelf` |
@@ -138,6 +143,6 @@ A parancs az aktuális `MoteveGuide` mappából készít ellenőrzött ZIP-et, l
 - [Grafikai elemek forrásai](MoteveGuide/ARTWORK.md)
 - [Küldetésadatok forrásmegjelölése](MoteveGuide/SOURCES.md)
 
-A küldetésadatok a Questie / QuestieDB projektből származnak; a származtatott útvonaladatokhoz GPL-3.0 forrásmegjelölés tartozik. A **Barlow** és **Marcellus** betűtípusok SIL Open Font License alatt érhetők el; a licencfájlok a `MoteveGuide/Fonts/` könyvtárban találhatók. A grafikai elemek eredetét az artwork-leírás dokumentálja.
+A régi útvonalak küldetésadatai a Questie / QuestieDB projektből származnak; a származtatott útvonaladatokhoz GPL-3.0 forrásmegjelölés tartozik. A `*_rxp` útvonalak a [RestedXP/RXPGuides](https://github.com/RestedXP/RXPGuides) ingyenes WoW Forever guide-jaiból készültek, módosítva, CC BY-NC-SA 4.0 licenccel (nem kereskedelmi felhasználás; `MoteveGuide/RXP-LICENSE`). A **Barlow** és **Marcellus** betűtípusok SIL Open Font License alatt érhetők el; a licencfájlok a `MoteveGuide/Fonts/` könyvtárban találhatók. A grafikai elemek eredetét az artwork-leírás dokumentálja.
 
-A 0.7.1-es csomag helyi Lua teszteken ellenőrizve (kinézetek, léptetés, útvonalak, méretezés, súgók és magyar karakterek). A 0.7.2 útvonaljavításait (repülési pontok, Tauren quest-sorrend) a `python tools/check_routes.py`, a mentett lépések átszámozását a `python tools/check_step_migration.py` ellenőrzi. Élő WoW-kliensben a legutóbbi javítások még ellenőrzendők.
+Tesztek: `python3 -m unittest discover -s tests` (a konverter és a csomag), valamint `lua5.1 tests/lua/run.lua` (útvonalválasztás és léptetés WoW API-csonkokkal; a Python-teszt is lefuttatja, Lua nélkül hibával leáll, hacsak nincs `MOTEVE_SKIP_LUA=1` beállítva). A 0.7.2 útvonaljavításait (repülési pontok, Tauren quest-sorrend) a `python tools/check_routes.py`, a mentett lépések átszámozását a `python tools/check_step_migration.py` ellenőrzi. Élő WoW-kliensben a RestedXP-útvonalak és a legutóbbi javítások még ellenőrzendők.

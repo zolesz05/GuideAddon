@@ -63,11 +63,19 @@ function ns.GuideAvailable(g)
     return not secret(faction) and (not faction or required==faction)
 end
 local function GuideById(id) for _, g in ipairs(ns.GUIDES or {}) do if g.id == id then return g end end end
+-- a route for the race and class (g.classes) comes before one for the race only
 local function GuideForRace()
     local _, race = UnitRace("player")
     race = race and race:upper() or ""
-    for _, g in ipairs(ns.GUIDES or {}) do if g.races[race] then return g end end
-    return ns.GUIDES and ns.GUIDES[1]
+    local _, cls = UnitClass("player")
+    local raceOnly
+    for _, g in ipairs(ns.GUIDES or {}) do
+        if g.races[race] then
+            if not g.classes then raceOnly = raceOnly or g
+            elseif cls and g.classes[cls] then return g end
+        end
+    end
+    return raceOnly or (ns.GUIDES and ns.GUIDES[1])
 end
 
 local function ClassOk(s)
@@ -79,6 +87,23 @@ local function ClassOk(s)
     local _, cls = UnitClass("player")
     local b = CLASSBIT[cls or ""] or 0
     return bit.band(s.cls, b) ~= 0
+end
+
+-- objective n of a quest in the log is finished (RestedXP-style steps, one per objective)
+local function ObjectiveDone(q, n)
+    if not InLog(q) then return false end
+    if C_QuestLog and C_QuestLog.GetQuestObjectives then
+        local ok, t = pcall(C_QuestLog.GetQuestObjectives, q)
+        if ok and type(t) == "table" then return t[n] and t[n].finished and true or false end
+    end
+    if GetQuestLogIndexByID and GetQuestLogLeaderBoard then
+        local idx = GetQuestLogIndexByID(q)
+        if idx and idx > 0 then
+            local _, _, fin = GetQuestLogLeaderBoard(n, idx)
+            return fin and true or false
+        end
+    end
+    return false
 end
 
 -- is this step finished (or not for us)?
@@ -99,9 +124,15 @@ local function StepDone(i)
     local k = s.k
     if k == "zone" or k == "lvl" then return true end
     if k == "a" then return InLog(s.q) or Completed(s.q) end
-    if k == "c" then return Completed(s.q) or (InLog(s.q) and LogComplete(s.q)) end
+    if k == "c" then return Completed(s.q) or (InLog(s.q) and LogComplete(s.q)) or (s.oi and ObjectiveDone(s.q, s.oi)) end
     if k == "t" then return Completed(s.q) end
-    if k == "grind" then return (UnitLevel("player") or 1) >= (s.lv or 1) end
+    if k == "grind" then
+        -- xp: >= 1 is xp into level lv, < 0 is xp short of the next level, 0..1 a fraction of the bar
+        local lv, need = UnitLevel("player") or 1, s.lv or 1
+        if lv ~= need or not s.xp then return lv >= need end
+        local cur, maxv = UnitXP("player") or 0, UnitXPMax("player") or 1
+        return cur >= (s.xp < 0 and maxv + s.xp or s.xp < 1 and s.xp * maxv or s.xp)
+    end
     if k == "fp" then return char.fp[s.npc or s.t] and true or false end
     return false
 end
