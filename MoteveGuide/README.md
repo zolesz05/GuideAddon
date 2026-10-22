@@ -11,6 +11,13 @@ Saját Horde és Alliance leveling útvonalak WoW Foreverhez, RestedXP-szerű m�
 - Hearthstone-, trainer-, vendor-, repülés- és utazási lépések is vannak. Ezeket a jobb nyíllal vagy `/mg next` paranccsal zárhatod le.
 - A RestedXP-szövegek angolok, a hardcore-ágat és a dungeon-lépéseket nem tartalmazza. A `tools/import_rxp.py` egy rögzített RXPGuides commitból generálja az útvonalakat.
 
+## 0.7.2 – javított Horde útvonalak (Tauren, Orc / Troll, Undead)
+
+- Nincs több repülési pont felvétele ott, ahol a kliensben nincs flight master: Bloodhoof Village (Seikwa), Razor Hill (Shoja'my) és Brill (Morganus). Ezek a lépések korábban csak kézi átugrással tűntek el.
+- Tauren útvonal: az **A Task Unfinished** quest a Camp Narache és Bloodhoof Village közötti úton jelenik meg (Antur Fallow), a leadása Innkeeper Kauthnál rögtön a Bloodhoof Village-be érkezéskor, nem Thunder Bluff után.
+- A `tools/check_routes.py` ellenőrzi, hogy minden repülési pont létezik a célkliensben.
+- A már elkezdett karakterek mentett lépése és kézi átugrásai az első belépéskor egyszer átszámozódnak, így a Guide ugyanott folytatódik; a törölt repülési pont átugrása nem öröklődik a helyére került lépésre. Ezt a `tools/check_step_migration.py` ellenőrzi.
+
 ## 0.7.1 – karika nélküli nyilak, Moteve alapértelmezés
 
 - Egyik nyílkinézet sem mutat körgyűrűt, iránytűkeretet vagy kör alakú hátteret. A mutató, távolság és megérkezési pipa megmarad.

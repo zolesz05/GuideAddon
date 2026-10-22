@@ -105,9 +105,9 @@ class OutputTest(unittest.TestCase):
             rxp.check_chains(bad, guides)
 
 
-# sha256 of the files at main 49f25ff
+# sha256 of the files at main cc7ecc0
 OLD_ROUTES = {
-    'Guides.lua': '4941bbb06996de1a9cda0d66399c960b7f0a39b650c60ad63f7120951b1089da',
+    'Guides.lua': '36e3daf60277c158c9f910f27a3ee238ad8d0f0b9601d9687190096f611b967a',
     'ZoneGuides.lua': '950e4a0a64d9fc9aed1757f69ae1ecd07c42eba05457a85db351c53f33ff30e3',
 }
 

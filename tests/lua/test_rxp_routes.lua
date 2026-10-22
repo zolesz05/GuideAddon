@@ -24,7 +24,8 @@ function T.mages_get_their_faction_mage_route()
 end
 
 function T.saved_route_and_index_stay()
-    local ns = H.Load({ race = "Tauren", char = { guide = "tauren", idx = 57, skip = { [3] = true } } })
+    -- stepRev = 1: already remapped by the 0.7.2 step migration, so the RXP routes must not move it again
+    local ns = H.Load({ race = "Tauren", char = { guide = "tauren", idx = 57, skip = { [3] = true }, stepRev = 1 } })
     H.eq(ns.char.guide, "tauren")
     H.eq(ns.char.idx, 57)
     H.eq(ns.guide.id, "tauren")
