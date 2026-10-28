@@ -221,13 +221,15 @@ QUEST_CONDITIONS = {'isOnQuest', 'isQuestComplete', 'isQuestTurnedIn', 'isQuestA
                     'isQuestNotComplete'}
 # Dungeon steps: the guides are #disabledungeons.
 DROP_COMMANDS = {'dungeon'}
+# Units to kill: their names become the 'mob' list of the step's complete steps.
+MOB_COMMANDS = {'mob', 'unitscan'}
 IGNORED_COMMANDS = {
-    'goto', 'target', 'mob', 'itemStat', 'itemcount', 'money', 'waypoint', 'zoneskip', 'skill', 'subzoneskip',
-    'unitscan', 'disablecheckbox', 'cast', 'link', 'line', 'usespell', 'bindlocation', 'cooldown', 'timer', 'destroy',
+    'goto', 'target', 'itemStat', 'itemcount', 'money', 'waypoint', 'zoneskip', 'skill', 'subzoneskip',
+    'disablecheckbox', 'cast', 'link', 'line', 'usespell', 'bindlocation', 'cooldown', 'timer', 'destroy',
     'aura', 'group', 'bankdeposit', 'bankwithdraw', 'skipgossip', 'skipgossipid', 'gossipoption', 'bronzetube',
     'maxlevel', 'macro', 'solo', 'addquestitem', 'engrave',
 }
-KNOWN_COMMANDS = QUEST_ACTIONS | NOTE_COMMANDS | QUEST_CONDITIONS | DROP_COMMANDS | IGNORED_COMMANDS
+KNOWN_COMMANDS = QUEST_ACTIONS | NOTE_COMMANDS | QUEST_CONDITIONS | DROP_COMMANDS | MOB_COMMANDS | IGNORED_COMMANDS
 # Directives that do not change whether a step is shown.
 NEUTRAL_DIRECTIVES = {'label', 'requires', 'loop', 'sticky', 'optional', 'map', 'hidewindow', 'level', 'softcore',
                       'ah', 'phase', 'era', 'era/som'}
@@ -477,7 +479,7 @@ def convert_step(step, scope, domain, titles, el):
     where = step['where']
     _, _, cond, _ = split_line(step['head'])
     shown = scope & condition(cond, where)
-    actions, notes, texts, gotos, pre, ex = [], [], [], [], [], []
+    actions, notes, texts, gotos, pre, ex, mobs = [], [], [], [], [], [], []
     loop, npc, comment_of = False, None, {}
     for raw, lwhere in step['lines']:
         if raw.startswith('#'):
@@ -508,6 +510,9 @@ def convert_step(step, scope, domain, titles, el):
                 texts.append((clean(text), lset))
         elif cmd == 'target':
             npc = npc or clean(args)
+        elif cmd in MOB_COMMANDS:
+            names = args.split(';') if cmd == 'unitscan' else [args]
+            mobs += [(name, lset) for name in (clean(n.strip().lstrip('+')) for n in names) if name]
         elif cmd in QUEST_CONDITIONS:
             q = int(args.split(',')[0])
             if cmd == 'isQuestTurnedIn':
@@ -570,6 +575,7 @@ def convert_step(step, scope, domain, titles, el):
             s['t'] = titles.get(q, f'Quest {q}')
             if k == 'c':
                 s['obj'] = text_for(pairs) or clean(comment)
+                s['mob'] = list(dict.fromkeys(name for name, mset in mobs if mset & pairs))
             elif npc:
                 s['npc'] = npc
             s['pre'] = sorted({p for target, p in pre if target in ('*', q)})
@@ -671,7 +677,7 @@ def add_steps(steps, guide, scope, domain, guides, titles, el):
 # ---------------------------------------------------------------------------
 # Lua output
 # ---------------------------------------------------------------------------
-FIELDS = ('k', 'q', 'oi', 'm', 'x', 'y', 't', 'npc', 'obj', 'lv', 'xp', 'cls', 'rr', 'pre', 'ex', 'el')
+FIELDS = ('k', 'q', 'oi', 'm', 'x', 'y', 't', 'npc', 'mob', 'obj', 'lv', 'xp', 'cls', 'rr', 'pre', 'ex', 'el')
 
 
 def lua_str(s):

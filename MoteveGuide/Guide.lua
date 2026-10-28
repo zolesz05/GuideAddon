@@ -8,7 +8,7 @@ local secret = issecretvalue or function() return false end
 
 local DEFAULTS = {
     guideSkin = "moteve", arrowSkin = "moteve",
-    show = true, arrow = true, waypoint = true, autoQuest = true, xp = true, lines = 4, scale = 0.85,
+    show = true, arrow = true, waypoint = true, autoQuest = true, xp = true, markTargets = true, lines = 4, scale = 0.85,
     point = "RIGHT", relPoint = "RIGHT", x = -40, y = 120,
     apoint = "TOP", arelPoint = "TOP", ax = 0, ay = -170,
 }
@@ -1012,6 +1012,7 @@ function ns.Refresh(keepScroll)
         A:Hide()
     end
     if ns.ApplyAppearance then ns.ApplyAppearance() end
+    if ns.UpdateMarks then pcall(ns.UpdateMarks) end
 end
 
 local closeButton=SkinBtn("skin_close", 28, nil, false, function() db.show = false; ns.Refresh() end, "Elrejtés (/mg)")

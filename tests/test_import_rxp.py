@@ -124,6 +124,7 @@ class PackageTest(unittest.TestCase):
         toc = (ROOT / 'MoteveGuide' / 'MoteveGuide.toc').read_text(encoding='utf-8')
         files = [l.strip() for l in toc.splitlines() if l.strip() and not l.startswith('#')]
         self.assertEqual(files.index('RXPRoutes.lua'), files.index('ZoneGuides.lua') + 1)
+        self.assertEqual(files.index('Marker.lua'), files.index('Guide.lua') + 1)
         self.assertRegex(toc, r'(?m)^## Version: 0\.8\.0$')
 
     def test_zip_has_the_routes_and_the_license(self):
@@ -159,6 +160,22 @@ class CommandTest(unittest.TestCase):
     def test_fp(self):
         s = self.one(f'{GOTO}\n.fp Camp Taurajo >> Get the Camp Taurajo flight path\n.target Omusa Thunderhorn')
         self.assertEqual((s['k'], s['t'], s['npc']), ('fp', 'Repülési pont: Camp Taurajo', 'Omusa Thunderhorn'))
+
+    def test_complete_lists_mob_and_unitscan_names(self):
+        steps = convert('.complete 747,1\n.mob +Plainstrider\n.unitscan Mazzranache;Plainstrider\n.mob Adult Plainstrider\n'
+                        '.complete 747,2', titles={747: 'The Hunt Begins'})
+        self.assertEqual([s['mob'] for s in steps], [['Plainstrider', 'Mazzranache', 'Adult Plainstrider']] * 2)
+
+    def test_mob_follows_its_line_condition(self):
+        s = self.one('.complete 1,1 << Warrior\n.mob Bristleback << Warrior\n.mob Battleboar << Shaman\n.mob Kodo')
+        self.assertEqual(s['mob'], ['Bristleback', 'Kodo'])
+
+    def test_mob_is_only_on_complete_steps(self):
+        for body in ('.accept 1 >>Accept A\n.mob Plainstrider', '.turnin 1 >>Turn in A\n.unitscan Plainstrider',
+                     '.fp Camp Taurajo\n.mob Plainstrider', '.hs >> Hearth\n.mob Plainstrider'):
+            self.assertNotIn('mob', self.one(body), body)
+        self.assertEqual(rxp.lua_step({'k': 'c', 'q': 1, 't': 'A', 'npc': 'N', 'mob': ['B', 'C"'], 'obj': 'o'}),
+                         '{k="c", q=1, t="A", npc="N", mob={"B","C\\""}, obj="o"}')
 
     def test_xp_is_a_grind_to_the_level(self):
         s = self.one('.xp 6 >> Grind to level 6')
