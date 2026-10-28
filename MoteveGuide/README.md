@@ -117,6 +117,7 @@ Az új generátor és az adatforrás másolata külön forráscsomagban érhető
 - Jobb klikk az ablak tetején: útvonal- és zónaváltó menü (ugrás bármelyik szakasz elejére).
 - Questek haladása: az aktuális lépésnél sávonként (pl. 4/12), a többinél röviden; zöld, ha kész.
 - Bal klikk egy soron: ez legyen az aktuális. Jobb klikk: kész / kihagy.
+- Célpont jelölése: az aktuális lépés NPC-je (felvétel, leadás, repülési pont, NPC-s megjegyzés) csillagot, a megölendő mob koponyát kap, amint a névtáblája, az egérmutató alatti vagy a kijelölt egység között látszik. Ha a koponyás mob meghal, a koponya a következő élő, egyező mobra kerül. Lépésváltáskor a saját jelét leveszi; mások jelét soha nem veszi le és nem veszi el. Kikapcsolható: Options → „Célpont jelölése”.
 
 ## Parancsok
 `/mg` ablak ki/be · `/mg next` · `/mg prev` · `/mg reset` · `/mg guide tauren_rxp|orctroll_rxp|undead_rxp|human_rxp|dwarfgnome_rxp|nightelf_rxp|mage_h_rxp|mage_a_rxp|mage_aoe_a_rxp|orctroll|undead|tauren` · `/mg nyil` · `/mg auto` · `/mg opciok`
@@ -127,6 +128,9 @@ Beállítások: Options → AddOns → Moteve Guide.
 - Az útvonalat program generálta a quest-adatbázisból. Még nincs játékban végigtesztelve, ezért lehetnek benne fura sorrendek.
 - Stonetalonban és Ashenvale-ben kevés a quest, ott több a grind.
 - Utazási és hearthstone lépések még nincsenek benne.
+- A célpont jelölése csak egyedül működik: csapatban és raidben nem jelöl, és csapatba lépéskor leveszi a saját jeleit.
+- A jelölés az angol NPC- és mobneveket keresi, ezért nem angol nyelvű kliensen nem talál célpontot. A mobnevek csak a RestedXP-útvonalak (`*_rxp`) lépéseiben vannak.
+- Egy távoli egységről (nincs névtáblája, nem kijelölt, nincs az egér alatt) a jel csak akkor kerül le, amikor az egység újra elérhető.
 
 ## Credits
 A régi útvonalak quest-, NPC- és koordinátaadatai a [QuestieDB](https://github.com/Questie/Questie) projektből származnak (GPL-3.0). Az 1–20/22-es `*_rxp` útvonalak a RestedXP ingyenes WoW Forever guide-jaiból készültek ([RestedXP/RXPGuides](https://github.com/RestedXP/RXPGuides), `Guides/forever`: Mulgore, Durotar, Undead, Barrens, Human, Dwarf/Gnome, Night Elf, Alliance 11–20 és a Mage-útvonalak), módosítva, CC BY-NC-SA 4.0 licenccel (lásd `RXP-LICENSE` és `RXPRoutes.lua`). A RestedXP fizetős, 20/22 feletti guide-jaiból semmi nincs benne. A betűtípusok Barlow és Marcellus (SIL OFL).

@@ -2,11 +2,12 @@
 local ADDON_NAME, ns = ...
 
 local OPTIONS = {
-    { key = "show",      text = "Útvonal-ablak látszik",              tip = "Ugyanaz, mint a /mg parancs." },
-    { key = "arrow",     text = "Irány-nyíl",                         tip = "A képernyő tetején mutatja, merre van a következő cél." },
-    { key = "waypoint",  text = "Térképjelölő a célra",               tip = "A játék saját waypointját is beállítja a következő célra." },
-    { key = "autoQuest", text = "Automatikus quest felvétel / leadás", tip = "Csak az útvonal questjeinél. Shift nyomva tartásával kikapcsol.\nHa több jutalom közül kell választani, azt neked kell." },
-    { key = "xp",        text = "XP/óra sor",                         tip = "XP/óra, hány perc a szintlépésig, rested XP." },
+    { key = "show",        text = "Útvonal-ablak látszik",               tip = "Ugyanaz, mint a /mg parancs." },
+    { key = "arrow",       text = "Irány-nyíl",                          tip = "A képernyő tetején mutatja, merre van a következő cél." },
+    { key = "waypoint",    text = "Térképjelölő a célra",                tip = "A játék saját waypointját is beállítja a következő célra." },
+    { key = "autoQuest",   text = "Automatikus quest felvétel / leadás", tip = "Csak az útvonal questjeinél. Shift nyomva tartásával kikapcsol.\nHa több jutalom közül kell választani, azt neked kell." },
+    { key = "xp",          text = "XP/óra sor",                          tip = "XP/óra, hány perc a szintlépésig, rested XP." },
+    { key = "markTargets", text = "Célpont jelölése",                    tip = "Egyedül játszva csillagot tesz az aktuális lépés NPC-jére, koponyát a megölendő mobra.\nCsapatban nem jelöl, és más jelét nem veszi le." },
 }
 
 local panel = CreateFrame("Frame", "MoteveGuideOptions")
@@ -14,7 +15,7 @@ panel.name = "Moteve Guide"
 panel:Hide()
 local scroll=CreateFrame("ScrollFrame",nil,panel,"UIPanelScrollFrameTemplate")
 scroll:SetPoint("TOPLEFT",0,0);scroll:SetPoint("BOTTOMRIGHT",-26,0)
-local body=CreateFrame("Frame",nil,scroll);body:SetSize(620,550);scroll:SetScrollChild(body)
+local body=CreateFrame("Frame",nil,scroll);body:SetSize(620,578);scroll:SetScrollChild(body)
 ns.AppearanceSettingsBody=body
 
 -- Blizzard's default fonts on some clients lack Hungarian double acute glyphs.

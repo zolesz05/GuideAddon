@@ -3,7 +3,7 @@
 -- H.Load() loads the files of MoteveGuide.toc in their order, as the client does, then fires
 -- ADDON_LOADED and PLAYER_LOGIN for a character described by the options.
 local ADDON = "MoteveGuide"
-local TESTS = { "tests/lua/test_guide.lua", "tests/lua/test_rxp_routes.lua" }
+local TESTS = { "tests/lua/test_guide.lua", "tests/lua/test_rxp_routes.lua", "tests/lua/test_marker.lua" }
 
 local H = {}
 
@@ -48,11 +48,18 @@ end
 
 -- opts: race ("Tauren"), class ("WARRIOR"), faction, level, xp, xpMax, char (saved MoteveGuideChar),
 -- quests = { [id] = { log = true, complete = false, done = false, objectives = { {finished = true}, ... } } },
+-- units = { [token] = { guid = "g1", name = "Kodo", dead, friend, player, icon }, ... }: a table
+-- under two tokens is one unit; tokens the addon does not scan ("far") hold units out of reach.
+-- group, raid: IsInGroup() / IsInRaid(). H.marks logs each SetRaidTarget call as { unit, icon }.
 -- setup = function(ns) called after the TOC files load, before the events.
 function H.Load(opts)
     opts = opts or {}
     frames = {}
+    H.frames = frames
+    H.marks = {}
     local quests = opts.quests or {}
+    local units = opts.units or {}
+    opts.units = units
     local race = opts.race or "Tauren"
     local raceFile = race:gsub(" ", "")
     if raceFile == "Undead" then raceFile = "Scourge" end
@@ -94,6 +101,23 @@ function H.Load(opts)
             return f
         end,
         SlashCmdList = {},
+        UnitExists = function(u) return units[u] ~= nil end,
+        UnitGUID = function(u) return units[u] and units[u].guid end,
+        UnitName = function(u) return units[u] and units[u].name end,
+        UnitIsDead = function(u) return units[u] and units[u].dead or false end,
+        UnitIsPlayer = function(u) return units[u] and units[u].player or false end,
+        UnitCanAttack = function(_, u) return units[u] and not units[u].friend or false end,
+        IsInGroup = function() return opts.group or false end,
+        IsInRaid = function() return opts.raid or false end,
+        GetRaidTargetIndex = function(u) return units[u] and units[u].icon end,
+        -- like the client: an icon moves off the unit that had it, the same icon again takes it off
+        SetRaidTarget = function(u, icon)
+            H.marks[#H.marks + 1] = { u, icon }
+            local unit = assert(units[u], "SetRaidTarget on a missing unit")
+            if icon == 0 or unit.icon == icon then unit.icon = nil; return end
+            for _, other in pairs(units) do if other.icon == icon then other.icon = nil end end
+            unit.icon = icon
+        end,
     }
     -- anything else the UI code touches at load is a stub
     setmetatable(_G, { __index = function(_, k)

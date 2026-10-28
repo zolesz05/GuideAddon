@@ -13,5 +13,6 @@ ZoneGuides.lua
 RXPRoutes.lua
 Appearance.lua
 Guide.lua
+Marker.lua
 Resize.lua
 Options.lua
